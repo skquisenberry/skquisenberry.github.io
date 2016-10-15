@@ -110,7 +110,7 @@
         $count = 0;
           while($row = $result->fetch_assoc()) {
             if($count>84){
-              echo 'marker_function(' . get_lat($row["Location 1"]) . ", " . get_lng($row["Location 1"]) . ', "' . $row["Address 1"] . '", "' . $row["Address 1"] . '");' . "\n";
+              echo 'marker_function(' . get_lat($row["Location 1"]) . ", " . get_lng($row["Location 1"]) . ', "' . str_replace('"',"",$row["Provider Name"]) . '", "' . str_replace('"',"",$row["Address 1"]) . '", "' . str_replace('"',"",$row["Phone Number"]) . '", "' . str_replace('"',"",$row["Email Address"]) . '");' . "\n";
             } else { $count++; }
           }
         }
@@ -121,7 +121,7 @@
         $count = 0;
           while($row = $result->fetch_assoc()) {
             if($count!=0){
-              echo 'marker_function(' . get_lat($row["Location"]) . ", " . get_lng($row["Location"]) . ', "' . $row["Library"] . '", "' . $row["Library"] . '");' . "\n";
+              echo 'marker_function(' . get_lat($row["Location"]) . ", " . get_lng($row["Location"]) . ', "' . $row["Library"] . '", "' . str_replace('"',"",$row["Street Address"]) . '", "' . str_replace('"',"",$row["Phone Number"]) . '");' . "\n";
               } else { $count=420; }
           }
         }
@@ -132,7 +132,7 @@
         $count = 0;
           while($row = $result->fetch_assoc()) {
             if($count!=0){
-              echo 'geocode_function("' . $row["Address"] . '")' . "\n";
+              echo 'geocode_function("' . $row["Address"] . '", "' . $row["Name"] . '", "' . $row["Website"] . '")' . "\n";
               } else { $count=420; }
           }
         }
@@ -187,7 +187,7 @@
       </div>
 
       <div class = "checkbox-whole">
-        <form action = "index1.php" method = "post">
+        <form action = "index.php" method = "post">
           <label class = "checkbox"><input type = "checkbox" name="library" <?php if(isset($_POST['library'])) echo "checked='checked'"; ?>>Libraries</label>
           <label class = "checkbox"><input type = "checkbox" name="space" <?php if(isset($_POST['space'])) echo "checked='checked'"; ?>>Hackerspace</label>
           <label class = "checkbox"><input type = "checkbox" name="infant" <?php if(isset($_POST['infant'])) echo "checked='checked'"; ?>>Infant Care</label>
@@ -294,22 +294,30 @@
       }
     ?>
       }
-      function geocode_function(address) {
+      function geocode_function(address, name, website) {
+        var contentString = name.concat("<br>".concat(address.concat("<br>".concat(website))));
         geocoder = new google.maps.Geocoder();
         geocoder.geocode({'address': address}, function(results, status) {
+        var infowindow = new google.maps.InfoWindow({
+          content: contentString
+        });
           if(status == google.maps.GeocoderStatus.OK){
             var marker = new google.maps.Marker({
               map: map,
-              position: results[0].geometry.location
+              position: results[0].geometry.location,
+              title: name
             });
-            
+            marker.addListener('click', function() {
+              infowindow.open(map, marker);
+            })        
           } else {
               alert('Geocode broke boi: ' + status);
           }
       });
       }
-      function marker_function(latt, looong, name, contentString) {
+      function marker_function(latt, looong, name, address, phone, email='') {
         var coordinate = {lat: latt, lng: looong};
+        var contentString = name.concat("<br>".concat(address.concat("<br>".concat(phone.concat("<br>".concat(email))))));
         var infowindow = new google.maps.InfoWindow({
           content: contentString
         });

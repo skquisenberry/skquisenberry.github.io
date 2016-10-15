@@ -9,15 +9,17 @@ li>a:hover{
 
 }
 
-/*
-.navbar, li>a{
-	background-image: url("assets/img/Banner.png") !important;
-}
-*/
 
+.navbar, li>a{
+	/*background-image: url("assets/img/Banner.png") !important;*/
+	background-color: #009100;
+}
+
+/*
 .active {
 	background-color: #009100;
 }
+*/
 
 #map {
 	height: 500px;

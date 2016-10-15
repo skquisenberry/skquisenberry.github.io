@@ -107,28 +107,53 @@
     function plot_childcare_rows($result) {
       if ($result->num_rows > 0) {
           // output data of each row
+        $count = 0;
           while($row = $result->fetch_assoc()) {
-              echo 'geocode_function("' . $row["Address 1"] . '");' . "\n";
+            if($count>84){
+              echo 'marker_function(' . get_lat($row["Location 1"]) . ", " . get_lng($row["Location 1"]) . ');' . "\n";
+            } else { $count++; }
           }
         }
     }
     function plot_library_rows($result) {
       if ($result->num_rows > 0) {
           // output data of each row
+        $count = 0;
           while($row = $result->fetch_assoc()) {
-              echo 'geocode_function("' . $row["Street Address"] . '");' . "\n";
+            if($count!=0){
+              echo 'marker_function(' . get_lat($row["Location"]) . ", " . get_lng($row["Location"]) . ');' . "\n";
+              } else { $count=420; }
           }
         }
     }
     function plot_makerspace_or_user_rows($result) {
       if ($result->num_rows > 0) {
           // output data of each row
+        $count = 0;
           while($row = $result->fetch_assoc()) {
+            if($count!=0){
               echo 'geocode_function("' . $row["Address"] . '")' . "\n";
+              } else { $count=420; }
           }
         }
     }
-    
+    function get_lat($input) {
+      $value = explode("(",$input);
+      $value = explode(")",$value[1]);
+      $value = explode(", ",$value[0]);
+      $lat = $value[0];
+      $lng = $value[1];
+      
+      return $lat;
+    }
+    function get_lng($input) {
+      $value = explode("(",$input);
+      $value = explode(")",$value[1]);
+      $value = explode(", ",$value[0]);
+      $lat = $value[0];
+      $lng = $value[1];
+      return $lng;
+    }
     ?>
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -162,7 +187,7 @@
       </div>
 
       <div class = "checkbox-whole">
-        <form action = "index.php" method = "post">
+        <form action = "index1.php" method = "post">
           <label class = "checkbox"><input type = "checkbox" name="library">Libraries</label>
           <label class = "checkbox"><input type = "checkbox" name="space">Hackerspace</label>
           <label class = "checkbox"><input type = "checkbox" name="infant">Infant Care</label>
@@ -269,7 +294,6 @@
       }
     ?>
       }
-      
       function geocode_function(address) {
         geocoder = new google.maps.Geocoder();
         geocoder.geocode({'address': address}, function(results, status) {
@@ -283,6 +307,13 @@
               alert('Geocode broke boi: ' + status);
           }
       });
+      }
+      function marker_function(latt, looong) {
+        var coordinate = {lat: latt, lng: looong};
+            var marker = new google.maps.Marker({
+              map: map,
+              position: coordinate
+            });         
       }
 
  

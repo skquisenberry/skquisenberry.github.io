@@ -153,7 +153,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">ACE: Advancing Community Education</a>
+          <a class="navbar-brand" href="#">ACE</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
@@ -171,7 +171,7 @@
     <div class="container">
 
       <div class="starter-template">
-        <!--<h1>ACE: Advancing Community Education</h1>-->
+        <h1>ACE: Advancing Community Education</h1>
         <p class="lead">Find nearby libraries, child care centers, and innovation spaces in Vermont</p>
       </div>
 

@@ -33,3 +33,7 @@ li>a:hover{
 .checkbox-whole {
 	float: left;
 }
+
+.navbar-fixed-top {
+	background-image: url("assets/img/Banner.png") !important;
+}

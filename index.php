@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
 
-    <title>ACE: Advancing Childhood Education</title>
+    <title>ACE</title>
 
     <!-- Bootstrap core CSS -->
     <link href="dist/css/bootstrap.min.css" rel="stylesheet">
@@ -153,13 +153,14 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Child Dump</a>
+          <a class="navbar-brand" href="#">ACE</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">Home</a></li>
+            
+            <li><a href="#about">About Us</a></li>
             <!--
-            <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
             -->
           </ul>
@@ -170,7 +171,7 @@
     <div class="container">
 
       <div class="starter-template">
-        <h1>Dump your child</h1>
+        <h1>ACE: Advancing Childhood Education</h1>
         <p class="lead">Find nearby libraries and child care centers in Vermont</p>
       </div>
 
@@ -187,6 +188,10 @@
       </div>
 
       <div id="map"></div>
+<br/><br/><br/><br/><br/><br/><br/>
+      <div class = "starter-template">
+        <a name = "about"></a>
+      </div>
     
 
     </div><!-- /.container -->
@@ -223,7 +228,7 @@
               position: results[0].geometry.location
             });*/
           } else {
-              alert('Geocode broke boi: ' + status);
+              alert('Error finding address: ' + status);
           }
         });
 
@@ -314,5 +319,3 @@
     </script>
   </body>
 </html>
-
-<a href = "link.html" target = "_blank">website</a>

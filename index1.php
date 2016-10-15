@@ -109,9 +109,9 @@
           // output data of each row
         $count = 0;
           while($row = $result->fetch_assoc()) {
-            if($count!=0){
+            if($count>84){
               echo 'marker_function(' . get_lat($row["Location 1"]) . ", " . get_lng($row["Location 1"]) . ');' . "\n";
-            } else { $count=420; }
+            } else { $count++; }
           }
         }
     }
@@ -132,7 +132,7 @@
         $count = 0;
           while($row = $result->fetch_assoc()) {
             if($count!=0){
-              echo 'marker_function(' . get_lat($row["Address"]) . ", ". get_lng($row["Address"]) . ')' . "\n";
+              echo 'geocode_function("' . $row["Address"] . '")' . "\n";
               } else { $count=420; }
           }
         }
@@ -294,7 +294,20 @@
       }
     ?>
       }
-      
+      function geocode_function(address) {
+        geocoder = new google.maps.Geocoder();
+        geocoder.geocode({'address': address}, function(results, status) {
+          if(status == google.maps.GeocoderStatus.OK){
+            var marker = new google.maps.Marker({
+              map: map,
+              position: results[0].geometry.location
+            });
+            
+          } else {
+              alert('Geocode broke boi: ' + status);
+          }
+      });
+      }
       function marker_function(latt, looong) {
         var coordinate = {lat: latt, lng: looong};
             var marker = new google.maps.Marker({

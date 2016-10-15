@@ -110,7 +110,15 @@
         $count = 0;
           while($row = $result->fetch_assoc()) {
             if($count>84){
-              echo "marker_function(" . get_lat($row["Location 1"]) . ', ' . get_lng($row["Location 1"]) . ", '" . str_replace('"',"",$row["Provider Name"]) . "', '" . str_replace('"',"",$row["Address 1"]) . "', '" . str_replace('"',"",$row["Phone Number"]) . "', '" . "<a href = \"mailto:" . str_replace('"',"",$row["Email Address"]) . "\"">'" . str_replace('"',",$row["Email Address"]) . "'</a>');" . '\n';
+              echo "marker_function(" . get_lat($row["Location 1"]) .
+               ', ' . get_lng($row["Location 1"]) .
+                ", '" . str_replace("'","",str_replace('"',"",$row["Provider Name"])) .
+                 "', '" . str_replace("'","",str_replace('"',"",$row["Address 1"])) .
+                  "', '" . str_replace('"',"",$row["Phone Number"]) .
+                   "', '" . "<a href = \"mailto:" .
+                    str_replace('"',"",$row["Email Address"]) .
+                     "\">" . str_replace('"',"",$row["Email Address"]) .
+                      "</a>');" . "\n";
             } else { $count++; }
           }
         }
@@ -132,7 +140,7 @@
         $count = 0;
           while($row = $result->fetch_assoc()) {
             if($count!=0){
-              echo "geocode_function('" . $row["Address"] . "', '" . $row["Name"] . "', '<a href=\"" . $row["Website"] . "\"; target = \"_blank\")" . $row["Website"] . "</a>'" . '\n';
+              echo "geocode_function('" . $row["Address"] . "', '" . $row["Name"] . "', '<a href=\"" . $row["Website"] . "\" target = \"_blank\">" . $row["Website"] . "</a>')" . "\n";
               } else { $count=420; }
           }
         }

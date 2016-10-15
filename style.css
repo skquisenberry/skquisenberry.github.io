@@ -45,3 +45,8 @@ li>a:hover{
 .navbar-fixed-top {
 	background-image: url("assets/img/Banner.png") !important;
 }
+
+.navbar-brand {
+	background-color: #000000;
+	color: #FFFFFF;
+}

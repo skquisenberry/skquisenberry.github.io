@@ -83,15 +83,31 @@
     <script>
 
       function initMap() {
+        geocoder = new google.maps.Geocoder();
+        var address = '05401'
+
         var uluru = {lat: -25.363, lng: 131.044};
         var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 4,
-          center: uluru
+          zoom: 8,
+          //center: uluru
         });
+        geocoder.geocode({'address': address}, function(results, status){
+          if(status == google.maps.GeocoderStatus.OK){
+            map.setCenter(results[0].geometry.location);
+            var marker = new google.maps.Marker({
+              map: map,
+              position: results[0].geometry.location
+            });
+          } else {
+              alert('Geocode broke boi: ' + status);
+          }
+        });
+        /*
         var marker = new google.maps.Marker({
           position: uluru,
           map: map
         });
+*/
       }
 
     </script>

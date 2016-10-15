@@ -49,12 +49,8 @@
     }
     //echo "Connected successfully<br>";
 
-    function filter_libraries($conn, $hs_internet) {
-      if($hs_internet) {
-        $sql = "SELECT * FROM `Libraries` WHERE `Internet Type` = 'high speed'";
-      } else {
-        $sql = "SELECT * FROM `Libraries` WHERE 1";
-      }
+    function filter_libraries($conn) {
+      $sql = "SELECT * FROM `Libraries` WHERE 1";
       $result = $conn -> query($sql);
       return $result;
     }
@@ -68,39 +64,23 @@
       $result = $conn -> query($sql);
       return $result;
     }
-    function filter_infant($conn, $include_full) {
-      if($include_full) {
-        $sql = "SELECT * FROM `Childcare` WHERE `Reported Desired Infant Capacity` > 0";
-      } else {
-        $sql = "SELECT * FROM `Childcare` WHERE `Reported Infant Vacancies` > 0";
-      }
+    function filter_infant($conn) {
+      $sql = "SELECT * FROM `Childcare` WHERE `Reported Desired Infant Capacity` > 0";
       $result = $conn -> query($sql);
       return $result;
     }
-    function filter_toddler($conn, $include_full) {
-      if($include_full) {
-        $sql = "SELECT * FROM `Childcare` WHERE `Reported Desired Toddler Capacity` > 0";
-      } else {
-        $sql = "SELECT * FROM `Childcare` WHERE `Reported Toddler Vacancies` > 0";
-      }
+    function filter_toddler($conn) {
+      $sql = "SELECT * FROM `Childcare` WHERE `Reported Desired Toddler Capacity` > 0";
       $result = $conn -> query($sql);
       return $result;
     }
-    function filter_preschool($conn, $include_full) {
-      if($include_full) {
-        $sql = "SELECT * FROM `Childcare` WHERE `Reported Desired Preschool Capacity` > 0";
-      } else {
-        $sql = "SELECT * FROM `Childcare` WHERE `Reported Preschool Vacancies` > 0";
-      }
+    function filter_preschool($conn) {
+      $sql = "SELECT * FROM `Childcare` WHERE `Reported Desired Preschool Capacity` > 0";
       $result = $conn -> query($sql);
       return $result;
     }
-    function filter_school_age($conn, $include_full) {
-      if($include_full) {
-        $sql = "SELECT * FROM `Childcare` WHERE `Reported Desired School Age Capacity` > 0";
-      } else {
-        $sql = "SELECT * FROM `Childcare` WHERE `Reported School Age Vacancies` > 0";
-      }
+    function filter_school_age($conn) {
+      $sql = "SELECT * FROM `Childcare` WHERE `Reported Desired School Age Capacity` > 0";
       $result = $conn -> query($sql);
       return $result;
     }
@@ -202,8 +182,6 @@
           <label class = "checkbox"><input type = "checkbox" name="toddler" <?php if(isset($_POST['toddler'])) echo "checked='checked'"; ?>>Toddler Care</label>
           <label class = "checkbox"><input type = "checkbox" name="prek" <?php if(isset($_POST['prek'])) echo "checked='checked'"; ?>>Pre-K</label>
           <label class = "checkbox"><input type = "checkbox" name="school" <?php if(isset($_POST['school'])) echo "checked='checked'"; ?>>School Age</label>
-          <label class = "checkbox"><input type = "checkbox" name="internet" <?php if(isset($_POST['internet'])) echo "checked='checked'"; ?>>High Speed Internet</label>
-          <label class = "checkbox"><input type = "checkbox" name="vacant" <?php if(isset($_POST['vacant'])) echo "checked='checked'"; ?>>Vacancies</label>
           <label class = "submit"><input type = "submit" value = "Submit">
         </form>
       </div>
@@ -271,34 +249,24 @@
           });
         }
 
- <?
+  <?
       if(isset($_POST['library'])) {
-        if(isset($_POST['internet'])) {
-          plot_library_rows(filter_libraries($conn, True));
-        } else { plot_library_rows(filter_libraries($conn, False)); }
+        plot_library_rows(filter_libraries($conn));
 
       } else if(isset($_POST['space'])) {
           plot_makerspace_or_user_rows(filter_makerspaces($conn));
 
       } else if(isset($_POST['infant'])) {
-        if(isset($_POST['vacant'])) {
-          plot_childcare_rows(filter_infant($conn, False));
-        } else { plot_childcare_rows(filter_infant($conn, True)); }
+          plot_childcare_rows(filter_infant($conn));
 
       } else if(isset($_POST['toddler'])) {
-        if(isset($_POST['vacant'])) {
-          plot_childcare_rows(filter_toddler($conn, False));
-        } else { plot_childcare_rows(filter_toddler($conn, True)); }
+          plot_childcare_rows(filter_toddler($conn));
 
       } else if(isset($_POST['prek'])) {
-        if(isset($_POST['vacant'])) {
-          plot_childcare_rows(filter_preschool($conn, False));
-        } else { plot_childcare_rows(filter_preschool($conn, True)); }
+        plot_childcare_rows(filter_preschool($conn));
 
       } else if(isset($_POST['school'])) {
-        if(isset($_POST['vacant'])) {
-          plot_childcare_rows(filter_school_age($conn, False));
-        } else { plot_childcare_rows(filter_school_age($conn, True)); }
+        plot_childcare_rows(filter_school_age($conn));
       }
     ?>
       }

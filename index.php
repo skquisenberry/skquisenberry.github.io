@@ -36,8 +36,8 @@
 
 <?php
     $servername = "webdb.uvm.edu";
-    $username = "omarshal_admin";
-    $password = "r2SK86J9SP6t";
+    $username = "omarshal_reader";
+    $password = "vrd3s8tUJcNg";
     $dbname = "OMARSHAL_hackvt";
 
     // Create connection
@@ -107,28 +107,53 @@
     function plot_childcare_rows($result) {
       if ($result->num_rows > 0) {
           // output data of each row
+        $count = 0;
           while($row = $result->fetch_assoc()) {
-              echo 'geocode_function("' . $row["Address 1"] . '");' . "\n";
+            if($count>84){
+              echo 'marker_function(' . get_lat($row["Location 1"]) . ", " . get_lng($row["Location 1"]) . ', "' . $row["Address 1"] . '", "' . $row["Address 1"] . '");' . "\n";
+            } else { $count++; }
           }
         }
     }
     function plot_library_rows($result) {
       if ($result->num_rows > 0) {
           // output data of each row
+        $count = 0;
           while($row = $result->fetch_assoc()) {
-              echo 'geocode_function("' . $row["Street Address"] . '");' . "\n";
+            if($count!=0){
+              echo 'marker_function(' . get_lat($row["Location"]) . ", " . get_lng($row["Location"]) . ', "' . $row["Library"] . '", "' . $row["Library"] . '");' . "\n";
+              } else { $count=420; }
           }
         }
     }
     function plot_makerspace_or_user_rows($result) {
       if ($result->num_rows > 0) {
           // output data of each row
+        $count = 0;
           while($row = $result->fetch_assoc()) {
+            if($count!=0){
               echo 'geocode_function("' . $row["Address"] . '")' . "\n";
+              } else { $count=420; }
           }
         }
     }
-    
+    function get_lat($input) {
+      $value = explode("(",$input);
+      $value = explode(")",$value[1]);
+      $value = explode(", ",$value[0]);
+      $lat = $value[0];
+      $lng = $value[1];
+      
+      return $lat;
+    }
+    function get_lng($input) {
+      $value = explode("(",$input);
+      $value = explode(")",$value[1]);
+      $value = explode(", ",$value[0]);
+      $lat = $value[0];
+      $lng = $value[1];
+      return $lng;
+    }
     ?>
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -162,15 +187,15 @@
       </div>
 
       <div class = "checkbox-whole">
-        <form action = "index.php" method = "post">
-          <label class = "checkbox"><input type = "checkbox" name="library">Libraries</label>
-          <label class = "checkbox"><input type = "checkbox" name="space">Hackerspace</label>
-          <label class = "checkbox"><input type = "checkbox" name="infant">Infant Care</label>
-          <label class = "checkbox"><input type = "checkbox" name="toddler">Toddler Care</label>
-          <label class = "checkbox"><input type = "checkbox" name="prek">Pre-K</label>
-          <label class = "checkbox"><input type = "checkbox" name="school">School Age</label>
-          <label class = "checkbox"><input type = "checkbox" name="internet">High Speed Internet</label>
-          <label class = "checkbox"><input type = "checkbox" name="vacant">Vacancies</label>
+        <form action = "index1.php" method = "post">
+          <label class = "checkbox"><input type = "checkbox" name="library" <?php if(isset($_POST['library'])) echo "checked='checked'"; ?>>Libraries</label>
+          <label class = "checkbox"><input type = "checkbox" name="space" <?php if(isset($_POST['space'])) echo "checked='checked'"; ?>>Hackerspace</label>
+          <label class = "checkbox"><input type = "checkbox" name="infant" <?php if(isset($_POST['infant'])) echo "checked='checked'"; ?>>Infant Care</label>
+          <label class = "checkbox"><input type = "checkbox" name="toddler" <?php if(isset($_POST['toddler'])) echo "checked='checked'"; ?>>Toddler Care</label>
+          <label class = "checkbox"><input type = "checkbox" name="prek" <?php if(isset($_POST['prek'])) echo "checked='checked'"; ?>>Pre-K</label>
+          <label class = "checkbox"><input type = "checkbox" name="school" <?php if(isset($_POST['school'])) echo "checked='checked'"; ?>>School Age</label>
+          <label class = "checkbox"><input type = "checkbox" name="internet" <?php if(isset($_POST['internet'])) echo "checked='checked'"; ?>>High Speed Internet</label>
+          <label class = "checkbox"><input type = "checkbox" name="vacant" <?php if(isset($_POST['vacant'])) echo "checked='checked'"; ?>>Vacancies</label>
           <label class = "submit"><input type = "submit" value = "Submit">
         </form>
       </div>
@@ -269,7 +294,6 @@
       }
     ?>
       }
-      
       function geocode_function(address) {
         geocoder = new google.maps.Geocoder();
         geocoder.geocode({'address': address}, function(results, status) {
@@ -283,6 +307,20 @@
               alert('Geocode broke boi: ' + status);
           }
       });
+      }
+      function marker_function(latt, looong, name, contentString) {
+        var coordinate = {lat: latt, lng: looong};
+        var infowindow = new google.maps.InfoWindow({
+          content: contentString
+        });
+            var marker = new google.maps.Marker({
+              map: map,
+              position: coordinate,
+              title: name
+            });
+            marker.addListener('click', function() {
+              infowindow.open(map, marker);
+            })        
       }
 
  

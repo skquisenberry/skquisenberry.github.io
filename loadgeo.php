@@ -108,7 +108,7 @@
       if ($result->num_rows > 0) {
           // output data of each row
           while($row = $result->fetch_assoc()) {
-              echo 'geocode_function("' . $row["Address 1"] . '");' . "\n";
+              echo 'window.setTimeout(geocode_function("' . $row["Address 1"] . '"),300);' . "\n";
           }
         }
     }
@@ -116,7 +116,7 @@
       if ($result->num_rows > 0) {
           // output data of each row
           while($row = $result->fetch_assoc()) {
-              echo 'geocode_function("' . $row["Street Address"] . '");' . "\n";
+              echo 'window.setTimeout(geocode_function("' . $row["Street Address"] . '"),300);' . "\n";
           }
         }
     }
@@ -124,7 +124,7 @@
       if ($result->num_rows > 0) {
           // output data of each row
           while($row = $result->fetch_assoc()) {
-              echo 'geocode_function("' . $row["Address"] . '")' . "\n";
+              echo 'window.setTimeout(geocode_function("' . $row["Address"] . '"),300)' . "\n";
           }
         }
     }
@@ -162,7 +162,7 @@
       </div>
 
       <div class = "checkbox-whole">
-        <form action = "index.php" method = "post">
+        <form action = "index1.php" method = "post">
           <label class = "checkbox"><input type = "checkbox" name="library">Libraries</label>
           <label class = "checkbox"><input type = "checkbox" name="space">Hackerspace</label>
           <label class = "checkbox"><input type = "checkbox" name="infant">Infant Care</label>
@@ -239,36 +239,37 @@
         }
 
  <?
-      if(isset($_POST['library'])) {
-        if(isset($_POST['internet'])) {
-          plot_library_rows(filter_libraries($conn, True));
-        } else { plot_library_rows(filter_libraries($conn, False)); }
-
-      } else if(isset($_POST['space'])) {
+          plot_library_rows(filter_libraries($conn, False));
           plot_makerspace_or_user_rows(filter_makerspaces($conn));
-
-      } else if(isset($_POST['infant'])) {
-        if(isset($_POST['vacant'])) {
-          plot_childcare_rows(filter_infant($conn, False));
-        } else { plot_childcare_rows(filter_infant($conn, True)); }
-
-      } else if(isset($_POST['toddler'])) {
-        if(isset($_POST['vacant'])) {
-          plot_childcare_rows(filter_toddler($conn, False));
-        } else { plot_childcare_rows(filter_toddler($conn, True)); }
-
-      } else if(isset($_POST['prek'])) {
-        if(isset($_POST['vacant'])) {
-          plot_childcare_rows(filter_preschool($conn, False));
-        } else { plot_childcare_rows(filter_preschool($conn, True)); }
-
-      } else if(isset($_POST['school'])) {
-        if(isset($_POST['vacant'])) {
-          plot_childcare_rows(filter_school_age($conn, False));
-        } else { plot_childcare_rows(filter_school_age($conn, True)); }
-      }
+          plot_childcare_rows(filter_infant($conn, True));
+          plot_childcare_rows(filter_toddler($conn, True));
+          plot_childcare_rows(filter_preschool($conn, True));
+          plot_childcare_rows(filter_school_age($conn, True));
     ?>
       }
+      function ajaxFunction(){
+        var ajaxRequest;
+        ajaxRequest.onreadystatechange = function(){
+   
+      if(ajaxRequest.readyState == 4){
+         var ajaxDisplay = document.getElementById('ajaxDiv');
+         ajaxDisplay.innerHTML = ajaxRequest.responseText;
+      }
+   }
+    var address = document.getElementById('address').value;
+   var location = document.getElementById('location').value;
+   var queryString = "?address=" + address ;
+   
+   queryString +=  "&location=" + location;
+   ajaxRequest.open("GET", "loadgeo.php" + queryString, true);
+   ajaxRequest.send(null); 
+ }
+   <?
+    $location = $_GET['location'];
+    $address = $_GET['address'];
+    echo $location;
+    echo $address;
+   ?>
       
       function geocode_function(address) {
         geocoder = new google.maps.Geocoder();
@@ -279,13 +280,14 @@
               position: results[0].geometry.location
             });
             
+            ajaxFunction();
+            
           } else {
               alert('Geocode broke boi: ' + status);
           }
       });
       }
 
- 
     </script>
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYdzeJmc1XXUcu7nbFPh_E_7OakOy0sQQ&callback=initMap">

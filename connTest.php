@@ -13,13 +13,22 @@ if ($conn->connect_error) {
 }
 //echo "Connected successfully<br>";
 
-function filter_libraries($conn) {
-	$sql = "SELECT * FROM `Libraries` WHERE 1";
+function filter_libraries($conn, $hs_internet) {
+	if($hs_internet) {
+		$sql = "SELECT * FROM `Libraries` WHERE `Internet Type` = 'high speed'";
+	} else {
+		$sql = "SELECT * FROM `Libraries` WHERE 1";
+	}
 	$result = $conn -> query($sql);
 	return $result;
 }
 function filter_makerspaces($conn) {
 	$sql = "SELECT * FROM `Makerspaces` WHERE 1";
+	$result = $conn -> query($sql);
+	return $result;
+}
+function filter_user($conn) {
+	$sql = "SELECT * FROM `User` WHERE 1";
 	$result = $conn -> query($sql);
 	return $result;
 }
@@ -63,7 +72,7 @@ function print_childcare_rows($result) {
 	if ($result->num_rows > 0) {
     	// output data of each row
     	while($row = $result->fetch_assoc()) {
-        	echo $row["Provider Name"] . ", " . $row["Address 1"] . "<br>";
+        	echo $row["Provider Name"] . ", " . $row["Address 1"] . ", " . "<br>";
     	}
 	} else {
     	echo "0 results";
@@ -73,13 +82,13 @@ function print_library_rows($result) {
 	if ($result->num_rows > 0) {
     	// output data of each row
     	while($row = $result->fetch_assoc()) {
-        	echo $row["Library"] . ", " . $row["Street Address"] . "<br>";
+        	echo $row["Library"] . ", " . $row["Location"] . "<br>";
     	}
 	} else {
     	echo "0 results";
 	}
 }
-function print_makerspace_rows($result) {
+function print_makerspace_or_user_rows($result) {
 	if ($result->num_rows > 0) {
     	// output data of each row
     	while($row = $result->fetch_assoc()) {
@@ -90,7 +99,7 @@ function print_makerspace_rows($result) {
 	}
 }
 
-print_makerspace_rows(filter_makerspaces($conn));
+print_makerspace_or_user_rows(filter_user($conn));
 
 $conn->close();
 ?>

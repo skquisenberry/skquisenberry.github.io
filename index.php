@@ -153,13 +153,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">ACE</a>
+          <!--<a class="navbar-brand" href="#">ACE</a>-->
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">Home</a></li>
             
-            <li class = "active"><a href="#about">About Us</a></li>
+            <li class = "active"><a href="about.html">About Us</a></li>
             <!--
             <li><a href="#contact">Contact</a></li>
             -->

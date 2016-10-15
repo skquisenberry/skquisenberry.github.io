@@ -188,14 +188,14 @@
 
       <div class = "checkbox-whole">
         <form action = "index1.php" method = "post">
-          <label class = "checkbox"><input type = "checkbox" name="library">Libraries</label>
-          <label class = "checkbox"><input type = "checkbox" name="space">Hackerspace</label>
-          <label class = "checkbox"><input type = "checkbox" name="infant">Infant Care</label>
-          <label class = "checkbox"><input type = "checkbox" name="toddler">Toddler Care</label>
-          <label class = "checkbox"><input type = "checkbox" name="prek">Pre-K</label>
-          <label class = "checkbox"><input type = "checkbox" name="school">School Age</label>
-          <label class = "checkbox"><input type = "checkbox" name="internet">High Speed Internet</label>
-          <label class = "checkbox"><input type = "checkbox" name="vacant">Vacancies</label>
+          <label class = "checkbox"><input type = "checkbox" name="library" <?php if(isset($_POST['library'])) echo "checked='checked'"; ?>>Libraries</label>
+          <label class = "checkbox"><input type = "checkbox" name="space" <?php if(isset($_POST['space'])) echo "checked='checked'"; ?>>Hackerspace</label>
+          <label class = "checkbox"><input type = "checkbox" name="infant" <?php if(isset($_POST['infant'])) echo "checked='checked'"; ?>>Infant Care</label>
+          <label class = "checkbox"><input type = "checkbox" name="toddler" <?php if(isset($_POST['toddler'])) echo "checked='checked'"; ?>>Toddler Care</label>
+          <label class = "checkbox"><input type = "checkbox" name="prek" <?php if(isset($_POST['prek'])) echo "checked='checked'"; ?>>Pre-K</label>
+          <label class = "checkbox"><input type = "checkbox" name="school" <?php if(isset($_POST['school'])) echo "checked='checked'"; ?>>School Age</label>
+          <label class = "checkbox"><input type = "checkbox" name="internet" <?php if(isset($_POST['internet'])) echo "checked='checked'"; ?>>High Speed Internet</label>
+          <label class = "checkbox"><input type = "checkbox" name="vacant" <?php if(isset($_POST['vacant'])) echo "checked='checked'"; ?>>Vacancies</label>
           <label class = "submit"><input type = "submit" value = "Submit">
         </form>
       </div>

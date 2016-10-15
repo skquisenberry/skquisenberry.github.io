@@ -176,12 +176,12 @@
 
       <div class = "checkbox-whole">
         <form action = "index.php" method = "post">
-          <label class = "checkbox"><input type = "checkbox" name="library" <?php if(isset($_POST['library'])) echo "checked='checked'"; ?>>Libraries</label>
-          <label class = "checkbox"><input type = "checkbox" name="space" <?php if(isset($_POST['space'])) echo "checked='checked'"; ?>>Hackerspace</label>
-          <label class = "checkbox"><input type = "checkbox" name="infant" <?php if(isset($_POST['infant'])) echo "checked='checked'"; ?>>Infant Care</label>
-          <label class = "checkbox"><input type = "checkbox" name="toddler" <?php if(isset($_POST['toddler'])) echo "checked='checked'"; ?>>Toddler Care</label>
-          <label class = "checkbox"><input type = "checkbox" name="prek" <?php if(isset($_POST['prek'])) echo "checked='checked'"; ?>>Pre-K</label>
-          <label class = "checkbox"><input type = "checkbox" name="school" <?php if(isset($_POST['school'])) echo "checked='checked'"; ?>>School Age</label>
+          <label class = "checkbox"><input type = "radio" name="pinsView" value = "library" <?php if(isset($_POST['pinsView']) && $_POST['pinsView'] == "library") echo "checked='checked'"; ?>>Libraries</label>
+          <label class = "checkbox"><input type = "radio" name="pinsView" value = "space" <?php if(isset($_POST['pinsView']) && $_POST['pinsView'] == "space") echo "checked='checked'"; ?>>Hackerspace</label>
+          <label class = "checkbox"><input type = "radio" name="pinsView" value = "infant" <?php if(isset($_POST['pinsView']) && $_POST['pinsView'] == "infant") echo "checked='checked'"; ?>>Infant Care</label>
+          <label class = "checkbox"><input type = "radio" name="pinsView" value = "toddler" <?php if(isset($_POST['pinsView']) && $_POST['pinsView'] == "toddler") echo "checked='checked'"; ?>>Toddler Care</label>
+          <label class = "checkbox"><input type = "radio" name="pinsView" value = "prek" <?php if(isset($_POST['pinsView']) && $_POST['pinsView'] == "prek") echo "checked='checked'"; ?>>Pre-K</label>
+          <label class = "checkbox"><input type = "radio" name="pinsView" value = "school"<?php if(isset($_POST['pinsView']) && $_POST['pinsView'] == "school") echo "checked='checked'"; ?>>School Age</label>
           <label class = "submit"><input type = "submit" value = "Submit">
         </form>
       </div>

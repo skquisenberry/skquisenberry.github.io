@@ -250,22 +250,22 @@
         }
 
   <?
-      if(isset($_POST['library'])) {
+      if($_POST['pinsView'] == "library") {
         plot_library_rows(filter_libraries($conn));
 
-      } else if(isset($_POST['space'])) {
+      } else if($_POST['pinsView'] == "space") {
           plot_makerspace_or_user_rows(filter_makerspaces($conn));
 
-      } else if(isset($_POST['infant'])) {
+      } else if($_POST['pinsView'] == "infant") {
           plot_childcare_rows(filter_infant($conn));
 
-      } else if(isset($_POST['toddler'])) {
+      } else if($_POST['pinsView'] == "toddler") {
           plot_childcare_rows(filter_toddler($conn));
 
-      } else if(isset($_POST['prek'])) {
+      } else if($_POST['pinsView'] == "prek") {
         plot_childcare_rows(filter_preschool($conn));
 
-      } else if(isset($_POST['school'])) {
+      } else if($_POST['pinsView'] == "school") {
         plot_childcare_rows(filter_school_age($conn));
       }
     ?>

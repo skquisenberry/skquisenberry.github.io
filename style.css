@@ -9,3 +9,8 @@ body {
 #map {
 	height: 500px;
 }
+
+.location-window {
+	text-align: center;
+	font-size: 10pt;
+}

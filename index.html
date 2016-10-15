@@ -96,10 +96,10 @@
         geocoder.geocode({'address': address}, function(results, status){
           if(status == google.maps.GeocoderStatus.OK){
             map.setCenter(results[0].geometry.location);
-            var marker = new google.maps.Marker({
+            /*var marker = new google.maps.Marker({
               map: map,
               position: results[0].geometry.location
-            });
+            });*/
           } else {
               alert('Geocode broke boi: ' + status);
           }
@@ -120,8 +120,9 @@
               map: map,
               position: geolocate,
               content:
-              '<h2>Current Location</h2>'
+              '<p class = "location-window">Current Location</p>'
             });
+            map.setZoom(12);
             map.setCenter(geolocate);
           });
         }

@@ -159,7 +159,7 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">Home</a></li>
             
-            <li class = "active"><a href="about.html">About Us</a></li>
+            <li class = "active"><a href="about.html">About</a></li>
             <!--
             <li><a href="#contact">Contact</a></li>
             -->
@@ -188,10 +188,6 @@
       </div>
 
       <div id="map"></div>
-<br/><br/><br/><br/><br/><br/><br/>
-      <div class = "starter-template">
-        <a name = "about"></a>
-      </div>
     
 
     </div><!-- /.container -->

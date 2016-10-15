@@ -50,10 +50,12 @@ li>a:hover{
 	float: right;
 }
 
-.right-par {
+#right-par {
 	float:right;
+	width: 45%;
 }
 
-.left-par {
+#left-par {
 	float:left;
+	width: 45%;
 }

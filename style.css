@@ -10,7 +10,7 @@ li>a:hover{
 }
 
 .navbar, li>a{
-	background-color: #333333 !important;
+	background-image: url("assets/img/Banner.png") !important;
 }
 
 #map {

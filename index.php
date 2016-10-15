@@ -243,11 +243,17 @@
         if(!!navigator.geolocation){
           navigator.geolocation.getCurrentPosition(function(position){
             var geolocate = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-            var infowindow = new google.maps.InfoWindow({
+            /*var infowindow = new google.maps.InfoWindow({
               map: map,
               position: geolocate,
               content:
               '<p class = "location-window">Current Location</p>'
+            });*/
+            var marker = new google.maps.Marker({
+              map: map,
+              position: geolocate,
+              title: 'Current Location',
+              icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
             });
             map.setZoom(12);
             map.setCenter(geolocate);

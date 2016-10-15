@@ -49,3 +49,11 @@ li>a:hover{
 .navbar-nav {
 	float: right;
 }
+
+.right-par {
+	float:right;
+}
+
+.left-par {
+	float:left;
+}

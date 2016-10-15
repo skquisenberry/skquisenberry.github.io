@@ -9,3 +9,18 @@ body {
 #map {
 	height: 500px;
 }
+
+.location-window {
+	text-align: center;
+	font-size: 10pt;
+	float: right;
+}
+
+.checkbox {
+	padding-top: 10px;
+	padding-right: 15px;
+}
+
+.checkbox-whole {
+	float: left;
+}

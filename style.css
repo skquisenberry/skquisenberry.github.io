@@ -9,8 +9,14 @@ li>a:hover{
 
 }
 
+/*
 .navbar, li>a{
 	background-image: url("assets/img/Banner.png") !important;
+}
+*/
+
+.active {
+	background-color: #009100;
 }
 
 #map {

@@ -159,7 +159,7 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">Home</a></li>
             
-            <li><a href="#about">About Us</a></li>
+            <li class = "active"><a href="#about">About Us</a></li>
             <!--
             <li><a href="#contact">Contact</a></li>
             -->
@@ -171,8 +171,8 @@
     <div class="container">
 
       <div class="starter-template">
-        <h1>ACE: Advancing Childhood Education</h1>
-        <p class="lead">Find nearby libraries and child care centers in Vermont</p>
+        <h1>ACE: Advancing Community Education</h1>
+        <p class="lead">Find nearby libraries, child care centers, and innovation spaces in Vermont</p>
       </div>
 
       <div class = "checkbox-whole">

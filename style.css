@@ -1,9 +1,16 @@
 body {
-  padding-top: 50px;
+	background-color: #ffffff;
+	padding-top: 50px;
 }
-.starter-template {
-  padding: 40px 15px;
-  text-align: center;
+
+
+li>a:hover{
+        background-color: #444444 !important;
+
+}
+
+.navbar, li>a{
+	background-color: #333333 !important;
 }
 
 #map {
@@ -19,6 +26,8 @@ body {
 .checkbox {
 	padding-top: 10px;
 	padding-right: 15px;
+	color: #000000;
+
 }
 
 .checkbox-whole {

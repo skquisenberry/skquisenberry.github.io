@@ -36,8 +36,8 @@
 
 <?php
     $servername = "webdb.uvm.edu";
-    $username = "omarshal_admin";
-    $password = "r2SK86J9SP6t";
+    $username = "omarshal_reader";
+    $password = "vrd3s8tUJcNg";
     $dbname = "OMARSHAL_hackvt";
 
     // Create connection
@@ -110,7 +110,7 @@
         $count = 0;
           while($row = $result->fetch_assoc()) {
             if($count>84){
-              echo 'marker_function(' . get_lat($row["Location 1"]) . ", " . get_lng($row["Location 1"]) . ');' . "\n";
+              echo 'marker_function(' . get_lat($row["Location 1"]) . ", " . get_lng($row["Location 1"]) . ', "' . $row["Address 1"] . '", "' . $row["Address 1"] . '");' . "\n";
             } else { $count++; }
           }
         }
@@ -121,7 +121,7 @@
         $count = 0;
           while($row = $result->fetch_assoc()) {
             if($count!=0){
-              echo 'marker_function(' . get_lat($row["Location"]) . ", " . get_lng($row["Location"]) . ');' . "\n";
+              echo 'marker_function(' . get_lat($row["Location"]) . ", " . get_lng($row["Location"]) . ', "' . $row["Library"] . '", "' . $row["Library"] . '");' . "\n";
               } else { $count=420; }
           }
         }
@@ -308,12 +308,19 @@
           }
       });
       }
-      function marker_function(latt, looong) {
+      function marker_function(latt, looong, name, contentString) {
         var coordinate = {lat: latt, lng: looong};
+        var infowindow = new google.maps.InfoWindow({
+          content: contentString
+        });
             var marker = new google.maps.Marker({
               map: map,
-              position: coordinate
-            });         
+              position: coordinate,
+              title: name
+            });
+            marker.addListener('click', function() {
+              infowindow.open(map, marker);
+            })        
       }
 
  
